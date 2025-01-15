@@ -1,0 +1,20 @@
+{
+    "tasks": [
+      {
+        "id": "id1",
+        "description_task": "description",
+        "status": "todo",
+        "createdAt": "data",
+        "updatedAt": "data"
+      },
+      {
+        "id": "id2",
+        "description_task": "description of the second task",
+        "status": "in-progress",
+        "createdAt": "data",
+        "updatedAt": "data"
+      }
+    ]
+  }
+
+### exemplo da estrutura
