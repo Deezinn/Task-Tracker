@@ -53,7 +53,7 @@ class Task:
         if status_ou_descricao == 'status':
             task_a_modificar = int(input("Digite o id da task que deseja modificar: "))
             novo_status = int(input("Digite o status da tarefa 1 para (todo) 2 para (in-progress) 3 para (done): "))
-            
+
             if novo_status == 1:
                 novo_status = 'todo'
             elif novo_status == 2:
@@ -66,6 +66,8 @@ class Task:
             for tasks in self.tasks:
                 if tasks['id'] == task_a_modificar:
                     tasks['status'] = novo_status
+                    tasks['updated_at'] = datetime.now().date()
+
         elif status_ou_descricao == 'descrição':
             task_a_modificar = int(input("Digite o id da task que deseja modificar: "))
             nova_descricao = input("Digite a nova descrição: ")
