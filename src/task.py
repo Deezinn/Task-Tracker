@@ -6,37 +6,47 @@ class Task:
 
     def get_all_tasks(self):
         if not self.tasks:
-            print("Não há tarefas registradas")
+            print("Não há tarefas registradas.")
         else:
             for tasks in self.tasks:
                 print(tasks)
 
     def get_completed_tasks(self):
-        if not self.tasks:
-            print("Não há tarefas registradas")
-        ## atribuir um elif caso nao tenha task completadas
-        else:
+        if self.tasks:
+            encontrou_concluida = False
             for tasks in self.tasks:
                 if tasks['status'] == 'done':
                     print(tasks)
+                    encontrou_concluida = True
+            if not encontrou_concluida:
+                print("Não há tarefas completadas.")
+        else:
+            print("Não há tarefas registradas.")
 
     def get_pending_tasks(self):
-        if not self.tasks:
-            print("Não há tarefas registradas")
-        ## atribuir um elif caso nao tenha task pendentes
-        else:
+        if self.tasks:
+            econtrou_pendente = False
             for tasks in self.tasks:
                 if tasks['status'] == 'todo':
                     print(tasks)
+                    econtrou_pendente = True
+            if not econtrou_pendente:
+                print("Não há tarefas pendentes.")
+        else:
+            print("Não há tarefas registradas.")
 
     def get_in_progress_tasks(self):
-        if not self.tasks:
-            print("Não há tarefas registradas")
-        ## atribuir um elif caso nao tenha task em progress
-        else:
+        if self.tasks:
+            econtrou_progresso = False
             for tasks in self.tasks:
                 if tasks['status'] == 'in-progress':
                     print(tasks)
+                    econtrou_progresso = True
+            if not econtrou_progresso:
+                print("Não há tarefas em progresso.")
+        else:
+            print("Não há tarefas registradas.")
+
 
     def add_task(self):
         id = len(self.tasks)
@@ -94,11 +104,11 @@ class Task:
                         tasks['description'] = nova_descricao
                         tasks['updated_at'] = datetime.now().date()
             else:
-                print("Você não digitou [status/descrição]")
+                print("Você não digitou [status/descrição]: ")
 
     def delete_task(self):
         if not self.tasks:
-            print("Não há tarefas registradas")
+            print("Não há tarefas registradas.")
         else:
             task_a_deletar = int(input("Digite o id da task que deseja deletar: "))
             for tasks in self.tasks:
