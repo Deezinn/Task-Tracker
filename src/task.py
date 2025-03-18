@@ -4,26 +4,41 @@ class Task:
     def __init__(self):
         self.tasks = []
 
-    def get_all_tasks(self):  # Lista todas as tarefas
-        for tasks in self.tasks:
-            print(tasks)
-
-    def get_completed_tasks(self):  # Lista tarefas concluídas
-        for tasks in self.tasks:
-            if tasks['status'] == 'done':
+    def get_all_tasks(self):
+        if not self.tasks:
+            print("Não há tarefas registradas")
+        else:
+            for tasks in self.tasks:
                 print(tasks)
 
-    def get_pending_tasks(self):  # Lista tarefas pendentes
-        for tasks in self.tasks:
-            if tasks['status'] == 'todo':
-                print(tasks)
+    def get_completed_tasks(self):
+        if not self.tasks:
+            print("Não há tarefas registradas")
+        ## atribuir um elif caso nao tenha task completadas
+        else:
+            for tasks in self.tasks:
+                if tasks['status'] == 'done':
+                    print(tasks)
 
-    def get_in_progress_tasks(self):  # Lista tarefas em andamento
-        for tasks in self.tasks:
-            if tasks['status'] == 'in-progress':
-                print(tasks)
+    def get_pending_tasks(self):
+        if not self.tasks:
+            print("Não há tarefas registradas")
+        ## atribuir um elif caso nao tenha task pendentes
+        else:
+            for tasks in self.tasks:
+                if tasks['status'] == 'todo':
+                    print(tasks)
 
-    def add_task(self):  # Adiciona uma nova tarefa
+    def get_in_progress_tasks(self):
+        if not self.tasks:
+            print("Não há tarefas registradas")
+        ## atribuir um elif caso nao tenha task em progress
+        else:
+            for tasks in self.tasks:
+                if tasks['status'] == 'in-progress':
+                    print(tasks)
+
+    def add_task(self):
         id = len(self.tasks)
         description = input("Digite a descrição da tarefa: ")
         status = int(input("Digite o status da tarefa 1 para (todo) 2 para (in-progress) 3 para (done): "))
@@ -48,51 +63,44 @@ class Task:
             'updated_at': updated_at
         })
 
-    def update_task(self):  # Atualiza uma tarefa existente
-        status_ou_descricao = input("Deseja modificar o status ou a descrição da atividade? [status/descrição]")
-        if status_ou_descricao == 'status':
-            task_a_modificar = int(input("Digite o id da task que deseja modificar: "))
-            novo_status = int(input("Digite o status da tarefa 1 para (todo) 2 para (in-progress) 3 para (done): "))
-
-            if novo_status == 1:
-                novo_status = 'todo'
-            elif novo_status == 2:
-                novo_status = 'in-progress'
-            elif novo_status == 3:
-                novo_status = 'done'
-            else:
-                print("Nenhuma das opções foram selecionadas.")
-
-            for tasks in self.tasks:
-                if tasks['id'] == task_a_modificar:
-                    tasks['status'] = novo_status
-                    tasks['updated_at'] = datetime.now().date()
-
-        elif status_ou_descricao == 'descrição':
-            task_a_modificar = int(input("Digite o id da task que deseja modificar: "))
-            nova_descricao = input("Digite a nova descrição: ")
-            for tasks in self.tasks:
-                if tasks['id'] == task_a_modificar:
-                    tasks['description'] = nova_descricao
-                    tasks['updated_at'] = datetime.now().date()
+    def update_task(self):
+        if not self.tasks:
+            print("Não há tarefas registradas")
         else:
-            print("Você não digitou [status/descrição]")
+            status_ou_descricao = input("Deseja modificar o status ou a descrição da atividade? [status/descrição]")
+            if status_ou_descricao == 'status':
+                task_a_modificar = int(input("Digite o id da task que deseja modificar: "))
+                novo_status = int(input("Digite o status da tarefa 1 para (todo) 2 para (in-progress) 3 para (done): "))
 
-    def delete_task(self):  # Remove uma tarefa
-        task_a_deletar = int(input("Digite o id da task que deseja deletar: "))
-        for tasks in self.tasks:
-            if tasks['id'] == task_a_deletar:
-                tasks.clear()
+                if novo_status == 1:
+                    novo_status = 'todo'
+                elif novo_status == 2:
+                    novo_status = 'in-progress'
+                elif novo_status == 3:
+                    novo_status = 'done'
+                else:
+                    print("Nenhuma das opções foram selecionadas.")
 
-task = Task()
-count = 0
-while True:
-    task.add_task()
-    count += 1
-    if count > 2:
-        break
-task.get_completed_tasks()
-task.update_task()
-task.get_all_tasks()
-task.delete_task()
-task.get_all_tasks()
+                for tasks in self.tasks:
+                    if tasks['id'] == task_a_modificar:
+                        tasks['status'] = novo_status
+                        tasks['updated_at'] = datetime.now().date()
+
+            elif status_ou_descricao == 'descrição':
+                task_a_modificar = int(input("Digite o id da task que deseja modificar: "))
+                nova_descricao = input("Digite a nova descrição: ")
+                for tasks in self.tasks:
+                    if tasks['id'] == task_a_modificar:
+                        tasks['description'] = nova_descricao
+                        tasks['updated_at'] = datetime.now().date()
+            else:
+                print("Você não digitou [status/descrição]")
+
+    def delete_task(self):
+        if not self.tasks:
+            print("Não há tarefas registradas")
+        else:
+            task_a_deletar = int(input("Digite o id da task que deseja deletar: "))
+            for tasks in self.tasks:
+                if tasks['id'] == task_a_deletar:
+                    tasks.clear()
