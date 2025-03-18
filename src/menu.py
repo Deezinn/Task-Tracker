@@ -46,7 +46,3 @@ class Menu:
                     break
                 case _:
                     print("opção invalida")
-
-
-menu = Menu()
-menu.escolhas()
